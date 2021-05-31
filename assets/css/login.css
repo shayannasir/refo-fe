@@ -1,0 +1,51 @@
+#login-bg {
+    background: transparent linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, rgba(224, 224, 224, 1) 100%) 0% 0% no-repeat padding-box;;
+}
+
+label {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(49,49,49,0.7);
+}
+input {
+    border: 2px solid rgb(49,49,49,0.6) !important;
+    border-radius: 8px !important;
+}
+.form-control:focus {
+    border-color: rgba(49,49,49) !important;
+    box-shadow: none !important;
+}
+.form-group .forgot-pass {
+    font-size: 12px;
+    float: right;
+    font-weight: 600;    
+    margin-top: 8px;
+    color: rgba(49, 49, 49, 0.5);
+}
+.custom-control-label {
+    font-size: 14px;
+    color: #C6213F;
+}
+.custom-control-label:before{
+    background-color:#fff;
+    border-color: rgba(49, 49, 49, 0.5);
+
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color:#C6213F;
+    border-color: transparent;
+}
+.custom-checkbox .custom-control-input:focus~.custom-control-label::before{
+    box-shadow: none; 
+}
+.cta-curvy {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    padding: 12px 35px;
+}
+.new-user {
+    margin-top: 20px;
+    font-size: 15px;
+}

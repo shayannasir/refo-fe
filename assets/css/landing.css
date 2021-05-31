@@ -1,0 +1,33 @@
+.landing {
+    position: relative;
+    height: 700px;
+}
+.hero-split {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+}
+.hero-left {
+    left: 0;
+    background-color: #FFE1E6E5;
+}
+.hero-right {
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 40px;
+    color: #C6213F;
+}
+.hero-right > * {
+    margin-bottom: 40px;
+}
+.hero-right .cta:hover {
+    background-color: #C6213F;
+    color: #fff;
+}
+.hero-right .heading-3 {
+    font-weight: 600;
+}
+
+

@@ -1,0 +1,410 @@
+/* GENERAL  */
+
+body {
+    min-height: 110vh;
+    background: transparent linear-gradient(180deg, #FAFAFA 0%, #E0E0E0 100%) 0% 0% no-repeat padding-box;
+}
+
+a {
+    text-decoration: none !important;
+
+}
+
+.navbar {
+    background: #C6213F 0% 0% no-repeat padding-box;
+    opacity: 0.9;
+}
+
+.modal {
+    overflow-y: auto;
+}
+
+.custom-inner-container {
+    margin: 2rem 1.5rem 1.8rem 1.5rem;
+
+}
+
+.custom-modal-container {
+    padding: 1.5rem 3rem;
+}
+
+
+.navbar a {
+    color: white;
+    font-size: 0.9rem;
+}
+
+.navbar a:hover {
+    color: rgb(219, 219, 219);
+}
+
+.navbar-brand {
+    font-size: 0.9rem;
+}
+
+.centered-ul li {
+    margin: 0 1rem;
+}
+
+
+.custom-button {
+    display: inline-block;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.5rem 2rem !important;
+    font-size: 0.9rem;
+    color: white;
+    border-radius: 10px;
+    background: transparent linear-gradient(73deg, #C6213F 0%, #BB1019 100%) 0% 0% no-repeat padding-box;
+    opacity: 0.9;
+    line-height: 1.5;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.custom-button:hover {
+    /* background: none; */
+    /* border: 1px solid #C6213F; */
+    /* background-color: transparent; */
+    color: #fff;
+}
+
+.custom-button-small {
+    padding: 0.3rem 1rem !important;
+    font-size: 0.7rem;
+}
+
+h1 {
+    color: #C6213F;
+    font-size: 2rem;
+}
+
+/* text {
+    margin-right: 1rem;
+    color: rgb(97, 96, 96);
+    font-size: 0.7rem;
+    cursor: pointer;
+} */
+
+/* table thead {
+    border-bottom: solid 1px #c6213fad;
+}
+
+table thead th {
+    color: #C6213F;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+table tbody tr {
+    text-align: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+} */
+
+.modal-title,
+.cross {
+    color: #C6213F;
+    font-size: 1.5rem;
+}
+
+.custom-modal-width {
+    max-width: 50%;
+}
+
+
+.modal .info {
+    font-size: 0.9rem;
+    line-height: 1.8rem;
+}
+
+.modal .copyCode {
+    line-height: 1rem;
+    color: #C6213F;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.modal i {
+    color: #C6213F;
+}
+
+.fullWidthTextArea {
+    width: 100%;
+    border: 1px solid #C6213F;
+    border-radius: 10px;
+}
+
+.dropdown-menu {
+    box-shadow: 0px 5px 10px #00000029;
+    border-radius: 20px;
+    border: none;
+    width: 80%;
+}
+
+.dropdown-item {
+    color: #C6213F;
+}
+
+.dropdown-item:hover {
+    background-color: #c6213fd8;
+    color: #ffffff;
+}
+
+.dropdown-item:focus {
+    background-color: #C6213F;
+    color: #ffffff;
+}
+
+.custom-border {
+    border-bottom: solid 1px #c6213fad;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFE1E6E5;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    border-radius: 10px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #C6213F;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #C6213F;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* GENERAL - END  */
+
+/* CUSTOM  */
+
+#login .card h4 {
+    font-weight: bold;
+    color: #C6213F;
+}
+
+#login p {
+    color: #555555;
+    font-weight: bold;
+}
+
+#login p a {
+    font-weight: bold;
+    color: #C6213F;
+}
+
+
+.textBackdrop {
+    color: #C6213F;
+    background-color: #FFE1E6;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
+}
+
+#sampleDoc img,
+#statusFinal img {
+    /* width: 45%; */
+    height: 60vh;
+}
+
+
+.custom-pagination {
+    font-size: 0.8rem;
+    color: #C6213F;
+}
+
+
+.custom-pagination i {
+    border: solid 2px #C6213F;
+    border-radius: 5px;
+    padding: 0.3rem 0.5rem;
+    margin: 0 0.5rem;
+}
+
+.custom-pagination i:hover {
+    background-color: #C6213F;
+    color: white;
+    cursor: pointer;
+}
+
+#uploadDoc .type {
+    cursor: pointer;
+}
+
+#uploadDoc .type p {
+    margin: 2rem 0 !important;
+    font-size: 0.8rem;
+}
+
+.select {
+    padding: 0rem !important;
+    color: white;
+    height: 8vh;
+    line-height: 8vh;
+}
+
+#uploadDoc .type.regular {
+    border: solid #2DC84C 6px;
+    border-radius: 20px;
+    color: #2DC84C;
+
+}
+
+#uploadDoc .regular .regular-inner {
+    padding: 2rem 2rem 0 2rem;
+
+}
+
+#uploadDoc .regular .select {
+    background-color: #2DC84C;
+
+}
+
+#uploadDoc .type.urgent {
+    border: solid #F68C00 6px;
+    border-radius: 20px;
+    color: #F68C00;
+}
+
+#uploadDoc .urgent .urgent-inner {
+    padding: 2rem 2rem 0 2rem;
+
+}
+
+#uploadDoc .urgent .select {
+    background-color: #F68C00;
+
+}
+
+#uploadDocRegular ol li {
+    line-height: 1.15;
+    font-size: 0.9rem;
+}
+
+
+
+
+
+/* COMMONS */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
+body {
+    height: 100vh !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.cta {
+    width: fit-content;
+    padding: 10px 25px;
+    font-size: 12px;
+    border: 1px solid #C6213F;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #C6213F;
+    transition: all 0.2s ease-in-out; 
+    text-transform: uppercase;
+}
+.cta:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.cta-fill {
+    background-color: #C6213F;
+    color: #fff;
+}
+
+label {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(49,49,49,0.7);
+}
+input {
+    border: 2px solid rgb(49,49,49,0.6) !important;
+    border-radius: 8px !important;
+}
+.form-control:focus {
+    border-color: rgba(49,49,49) !important;
+    box-shadow: none !important;
+}
+.card-light {
+    border-radius: 12px;
+    padding: 5px 35px;
+    border: none;
+}
+.card-light .form-group {
+    margin: 35px 0;
+}
+#login-bg {
+    background: transparent linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, rgba(224, 224, 224, 1) 100%) 0% 0% no-repeat padding-box;;
+}
+.custom-container {
+    padding-right: 10rem;
+    padding-left: 10rem;
+}
+/* Footer */
+.footer {
+    background-color: #C6213F;
+    font-size: 0.9rem;
+}
+
+@media screen and (max-width: 600px) {
+    .custom-container {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+}

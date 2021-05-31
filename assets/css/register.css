@@ -1,0 +1,36 @@
+.card-light {
+    padding: 15px 0;
+}
+.heading-2 {
+    font-weight: 600;
+    color: #C6213F;
+}
+.cta-curvy {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    padding: 12px 35px;
+}
+.action-wrapper {
+    display: flex;
+    align-items: center;
+}
+.action-wrapper a.refer {
+    font-size: 15px;
+    text-decoration: underline !important;
+    margin-left: 25px;
+    margin-bottom: 17px;
+    color: rgba(49, 49, 49, 0.8);
+}
+.otp-wrap {
+    align-items: normal !important;
+    top: 52px;
+    height: fit-content;
+}
+.cta-otp {
+    border-radius: 8px;
+}
+.bottom-text a {
+    color: #C6213F;
+}

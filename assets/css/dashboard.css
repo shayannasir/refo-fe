@@ -1,0 +1,38 @@
+.dashboard-container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+.card-light {
+    padding: 5px 15px;
+}
+table thead {
+    border-bottom: solid 1px #c6213fad;
+}
+
+table thead th {
+    color: #C6213F;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+table tbody tr {
+    text-align: center;
+    font-size: 0.9rem;
+    /* cursor: pointer; */
+}
+p.text {
+    margin-right: 1rem;
+    color: rgb(97, 96, 96);
+    font-size: 0.9rem;
+}
+p.text-small {
+    margin-top: 1rem;
+    color: rgb(97, 96, 96);
+    font-size: 0.7rem;
+}
+text {
+    margin-right: 1rem;
+    color: rgb(97, 96, 96);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
