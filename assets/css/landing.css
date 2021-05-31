@@ -29,5 +29,7 @@
 .hero-right .heading-3 {
     font-weight: 600;
 }
-
-
+body {
+    background: none;
+    background-color: #fff !important;
+}
