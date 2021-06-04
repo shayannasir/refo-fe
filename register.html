@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/toastr.min.css">
     <link rel="stylesheet" href="assets/css/register.css">
 
     <title>Register</title>
@@ -59,11 +60,11 @@
                     <div class="card-body mx-5">
                         <h2 class="my-4 heading-2">Registration </h2>
                         <form>
-                            <div class="row">
+                            <div class="row form-wrap">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group mt-4">
                                         <label for="email">E-mail</label>
-                                        <input type="email" class="form-control" id="email">
+                                        <input type="email" name="email" class="form-control validated" id="email">
                                     </div>
                                 </div>
 
@@ -72,11 +73,11 @@
                                         <div class="col-sm-12 col-md-7">
                                             <div class="form-group mt-4">
                                                 <label for="otp">OTP</label>
-                                                <input type="otp" class="form-control" id="otp">
+                                                <input type="otp" name="otp" class="form-control" disabled id="otp">
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-5  d-flex align-items-end mb-3 otp-wrap">
-                                            <a class="cta cta-fill cta-otp" href="#">Send OTP</a>
+                                            <a class="cta cta-fill cta-otp disable-btn" href="javascript:void(0)">Send OTP</a>
                                         </div>
                                     </div>
                                 </div>
@@ -84,62 +85,62 @@
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group  mt-4">
                                         <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="password">
+                                        <input type="password" name="password" class="form-control validated" id="password">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group  mt-4">
                                         <label for="password">Confirm Password</label>
-                                        <input type="password" class="form-control" id="password">
+                                        <input type="password" name="confirmPassword" class="form-control validated" id="confirmPassword">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group mt-4">
                                         <label for="fname">First Name</label>
-                                        <input type="fname" class="form-control" id="fname">
+                                        <input type="fname" name="fname" class="form-control" id="fname">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group mt-4">
                                         <label for="lname">Last Name</label>
-                                        <input type="lname" class="form-control" id="lname">
+                                        <input type="lname" name="lname" class="form-control" id="lname">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group mt-4">
                                         <label for="designation">Designation</label>
-                                        <input type="designation" class="form-control" id="designation">
+                                        <input type="designation" name="designation" class="form-control" id="designation">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group mt-4">
                                         <label for="number">Mobile Number</label>
-                                        <input type="number" class="form-control" id="number">
+                                        <input type="number" name="mobile" class="form-control" id="number">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group mt-4">
                                         <label for="degree">Degree</label>
-                                        <input type="degree" class="form-control" id="degree">
+                                        <input type="degree" name="degree" class="form-control" id="degree">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group mt-4">
-                                        <label for="institue">Institue</label>
-                                        <input type="institue" class="form-control" id="institue">
+                                        <label for="institue">Institute</label>
+                                        <input type="institue" name="institute" class="form-control" id="institue">
                                     </div>
                                 </div>
                             </div>
                             <div class="action-wrapper">
-                                <a class="cta cta-fill cta-curvy" href="register.html">Register</a>
-                                <a class="refer" href="">Add a referral code</a>
+                                <a class="cta cta-fill cta-curvy cta-register" href="javascript:void(0)">Register</a>
+                                <a class="refer" href="javascript:void(0)">Add a referral code</a>
                             </div>
                         </form>
                     </div>
@@ -161,6 +162,9 @@
     <!-- <script src="assets/js/popper.min.js"></script> -->
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/init.js"></script>
+    <script src="assets/js/toastr.min.js"></script>
+    <script src="assets/js/commons.js"></script>
+    <script src="assets/js/register.js"></script>
 </body>
 
 </html>

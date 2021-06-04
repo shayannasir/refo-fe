@@ -387,7 +387,7 @@ input {
     border: none;
 }
 .card-light .form-group {
-    margin: 35px 0;
+    height: 100px;
 }
 #login-bg {
     background: transparent linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, rgba(224, 224, 224, 1) 100%) 0% 0% no-repeat padding-box;;
@@ -396,12 +396,33 @@ input {
     padding-right: 10rem;
     padding-left: 10rem;
 }
-/* Footer */
 .footer {
     background-color: #C6213F;
     font-size: 0.9rem;
 }
+p.error {
+    color: firebrick;
+    font-size: 0.8rem;
+}
+p.success {
+    color: darkgreen;
+    font-size: 0.8rem;
+}
+.disable-btn {
+    pointer-events: none;
+    background-color: grey;
+    border: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 @media screen and (max-width: 600px) {
     .custom-container {
         padding-right: 1rem;

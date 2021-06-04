@@ -34,3 +34,12 @@
 .bottom-text a {
     color: #C6213F;
 }
+span.deleteField {
+    float: right;
+    position: absolute;
+    right: 20px;
+    font-size: 9px;
+    color: brown;
+    top: 35px;
+    cursor: pointer;
+}
