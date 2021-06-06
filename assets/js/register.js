@@ -1,22 +1,5 @@
 const referField = '<div class="col-sm-12 col-md-6"><div class="form-group mt-4"><label for="refer">Referrer Code <span class="deleteField">DELETE</span> </label><input type="text" name="referrerCode" class="form-control" id="refer"></div></div>';
 
-const showFieldError = function(field, error) {
-    field.parent().addClass('has-error').append(HELPER.getErrorText(error));
-    return false;
-}
-
-const showFieldSuccess = function(field, message) {
-    field.parent().append(HELPER.getSuccessText(message));
-}
-
-const clearFieldMessage = function(field) {
-    field.parent().removeClass('has-error').find('p').remove();
-}
-
-const showToast = function(status, message) {
-    toastr[status](message)  
-} 
-
 const verifyEmail = function(field, email) {
     clearFieldMessage(field);
     $('a.cta-otp').addClass('disable-btn');
@@ -130,7 +113,7 @@ const saveRegistrationDetails = function() {
                     }, 1000)
                     setTimeout(() => {
                         location.href = API.getBaseURL('/login.html');
-                    }, 8000)
+                    }, 6000)
                 } else if (data.status === false) {
                     if (data.data) {
                         for (const [key, value] of Object.entries(data.data))
@@ -143,6 +126,11 @@ const saveRegistrationDetails = function() {
         })
     }
 }
+
+$(document).ready(function() {
+    if(AUTH_TOKEN)
+        location.href = API.getBaseURL('/dashboard.html');
+})
 
 $('input').filter(function() { return !$(this).hasClass('validated')}).on('change focusout', function() {
     validateRequiredAndBlank($(this), $(this).val());

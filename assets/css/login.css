@@ -49,3 +49,21 @@ input {
     margin-top: 20px;
     font-size: 15px;
 }
+#forgotPass .form-group {
+    height: 100px;
+}
+.otp-wrap {
+    align-items: normal !important;
+    top: 30px;
+    height: fit-content;
+}
+.cta-otp {
+    border-radius: 8px;
+}
+
+#forgotPass .custom-modal-width {
+    max-width: 35%;
+}
+#forgotPass p.error {
+    line-height: 1.2;
+}

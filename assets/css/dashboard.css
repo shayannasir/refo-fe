@@ -36,3 +36,47 @@ text {
     font-size: 0.9rem;
     cursor: pointer;
 }
+.docFIRST_DRAFT,
+.docFINAL,
+.docDELIVERED,
+.payments {
+    cursor: pointer;
+}
+#submitDoc input[type=file]::file-selector-button {
+    background: transparent linear-gradient(71deg, #C6213F 0%, #BB1019 100%) 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    margin-right: 20px;
+}
+#submitDoc .d-flex {
+    align-items: center;
+}
+#submitDoc .file-control {
+    border: none !important;
+    padding-left: 0;
+    height: 60px;
+    font-size: 13px;
+    width: fit-content;
+}
+#submitDoc span.remove-file {
+    font-weight: 600;
+    color: #C6213F;
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+#submitDoc input, label, select, option, textarea, .custom-select {
+    font-size: 0.9rem;
+}
+#submitDoc .custom-modal-width {
+    max-width: 55%;
+}
+#submitDoc ol {
+    font-size: 0.9rem;
+}
+#submitDoc .file-group p.error {
+    margin-left: 10px;
+    margin-top: 6px;
+}
