@@ -434,6 +434,7 @@ p.success {
     pointer-events: none;
     background-color: grey;
     border: none;
+    background: grey;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

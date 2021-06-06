@@ -77,6 +77,7 @@ $('#submitDoc .cta-submit').on('click', function() {
     if (!validateFields()) {
         return showToast(TOAST.error, ERRORS_IN_FORM);
     } else {
+        $(this).addClass('disable-btn');
         $.ajax({ 
             type: "POST",
             url: API.getAPIEndPoint('/document/submit'),
@@ -89,6 +90,7 @@ $('#submitDoc .cta-submit').on('click', function() {
                     }, 2000)
                 } else if (data.status === false) {
                     showAjaxError(data);
+                    $(this).removeClass('disable-btn');
                 }
             }
         })
