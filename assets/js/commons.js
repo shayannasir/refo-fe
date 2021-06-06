@@ -52,9 +52,9 @@ var AUTH_TOKEN = false;
 
 // ENVIRONMENT SETUP
 var CURRENT = "";
-if (LOCAL.url.indexOf(location.hostname))
+if (LOCAL.url.indexOf(location.hostname)> -1)
     CURRENT = LOCAL;
-else if (UAT.url.indexOf(location.hostname))
+else if (UAT.url.indexOf(location.hostname) > -1)
     CURRENT = UAT;
 
 
