@@ -30,6 +30,7 @@
 }
 .cta-otp {
     border-radius: 8px;
+    max-height: 40px;
 }
 .bottom-text a {
     color: #C6213F;
