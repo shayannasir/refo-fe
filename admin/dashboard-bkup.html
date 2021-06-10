@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- For forced responsive -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
@@ -13,12 +12,12 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
 
-    <title>Dashbaord</title>
+    <title>Math-L1-Dev</title>
 </head>
 
-<body class="admin-dashboard">
+<body>
     <nav class="navbar navbar-expand-lg custom-container">
-        <a class="navbar-brand" href="index.html">ONEBIGBIT</a>
+        <a class="navbar-brand" href="#">ONEBIGBIT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
@@ -47,7 +46,7 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link cta-logout" href="javascript:void(0)">LOGOUT</a>
+                    <a class="nav-link" href="javascript:void(0)">LOGOUT</a>
                 </li>
             </ul>
         </div>
@@ -55,16 +54,16 @@
 
 
 
-    <div class="dashboard-container py-3" id="login-bg">
+    <div class="custom-container">
         <div class="d-flex justify-content-between align-items-center">
             <div class="dropdown">
-                <h1 class="custom-inner-container dropdown-toggle filter-dropdown" type="button" id="dropdownMenuButton"
+                <h1 class="custom-inner-container dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Dashboard</h1>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item filter" href="javascript:void(0)">All Work</a>
-                    <a class="dropdown-item filter" data-filter="REGULAR" href="javascript:void(0)">Regular Work</a>
-                    <a class="dropdown-item filter" data-filter="URGENT" href="javascript:void(0)">Urgent Work</a>
-                    <a class="dropdown-item filter" data-filter="DELAYED" href="javascript:void(0)">Delayed Work</a>
+                    <a class="dropdown-item" href="#">All Work</a>
+                    <a class="dropdown-item" href="#">Regular Work</a>
+                    <a class="dropdown-item" href="#">Urgent Work</a>
+                    <a class="dropdown-item" href="#">Delayed Work</a>
                 </div>
             </div>
 
@@ -74,14 +73,16 @@
                 <a data-toggle="modal" data-target="#sampleDoc" class="custom-button">General Sample</a>
             </div>
         </div>
-        <div class="card card-light mb-2">
+
+
+        <div class="card mb-2">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless table-hover dashboard-table">
+                    <table class="table table-borderless table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Document ID</th>
-                                <th scope="col">Name of Document</th>
+                                <th scope="col">Document</th>
                                 <th scope="col">Progress</th>
                                 <th scope="col">Tentative Pages</th>
                                 <th scope="col">Final Pages</th>
@@ -91,6 +92,150 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>60%</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo"
+                                    class="text-warning font-weight-bold">Partially Paid</td>
+                                <td data-toggle="modal" data-target="#statusFirstDraft">First Draft</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>60%</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo"
+                                    class="text-success font-weight-bold">Paid</td>
+                                <td>Accepted</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>0%</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo" class="text-danger font-weight-bold">
+                                    Due</td>
+                                <td data-toggle="modal" data-target="#statusFinal">Final</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>60%</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo"
+                                    class="text-warning font-weight-bold">Partially Paid</td>
+                                <td data-toggle="modal" data-target="#statusFirstDraft">First Draft</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>60%</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo"
+                                    class="text-warning font-weight-bold">Partially Paid</td>
+                                <td data-toggle="modal" data-target="#statusFirstDraft">First Draft</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>0%</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo" class="text-danger font-weight-bold">
+                                    Due</td>
+                                <td data-toggle="modal" data-target="#statusFinal">Final</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>60%</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo"
+                                    class="text-success font-weight-bold">Paid</td>
+                                <td>Accepted</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>0%</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo" class="text-danger font-weight-bold">
+                                    Due</td>
+                                <td data-toggle="modal" data-target="#statusFinal">Final</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>60%</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo"
+                                    class="text-warning font-weight-bold">Partially Paid</td>
+                                <td data-toggle="modal" data-target="#statusFirstDraft">First Draft</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>60%</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo"
+                                    class="text-success font-weight-bold">Paid</td>
+                                <td>Accepted</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">U-203948</th>
+                                <td>Lorem ipsum</td>
+                                <td>0%</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>user@gmail.com</td>
+                                <td data-toggle="modal" data-target="#paymentInfo" class="text-danger font-weight-bold">
+                                    Due</td>
+                                <td data-toggle="modal" data-target="#statusFinal">Final</td>
+                                <td><a data-toggle="modal" data-target="#uploadFile" href="#"
+                                        class="custom-button custom-button-small">Upload File</a></td>
+                            </tr>
 
                         </tbody>
                     </table>
@@ -99,11 +244,11 @@
             </div>
         </div>
         <div class="d-flex justify-content-between custom-inner-container">
-            <p class="text count">Total count: 0</p>
+            <text>Total count: 16</text>
             <div class="custom-pagination d-flex align-items-center">
-                <i class="fa fa-angle-left" aria-hidden="true"><</i>
-                <p class="text-small pagination">1-15</p>
-                <i class="fa fa-angle-right" aria-hidden="true">></i>
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                <text>1-15</text>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
             </div>
 
 
@@ -188,6 +333,7 @@
             </div>
         </div>
 
+
         <!-- Sample Document -->
         <div class="modal fade" id="sampleDoc" tabindex="-1" aria-labelledby="sampleDocLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered custom-modal-width">
@@ -198,16 +344,16 @@
                             <span class="cross" aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="d-flex file-group">
-                        <input type="file" class="form-control file-control" name="file" data-type="SAMPLE">
-                        <span class="remove-file">X</span>
+                    <div class="d-flex">
+                        <a class="custom-button my-2">Choose File</a>
                     </div>
                     <div class="d-flex justify-content-end my-3">
-                        <a href="javascript:void(0)" class="custom-button sample-submit">Confirm</a>
+                        <a href="#" class="custom-button">Confirm</a>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Upload File -->
         <div class="modal fade" id="uploadFile" tabindex="-1" aria-labelledby="uploadFileLabel" aria-hidden="true">
@@ -242,74 +388,11 @@
             </div>
         </div>
 
-        <!-- STATUS: Final -->
-        <div class="modal fade" id="docFINAL" tabindex="-1" aria-labelledby="statusFinalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered custom-modal-width">
-                <div class="modal-content card custom-modal-container">
-                    <div class="d-flex justify-content-between mb-4">
-                        <h5 class="modal-title" id="statusFinalLabel">Final Draft</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span class="cross" aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="d-flex">
-                        <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                        <p class="info">This is the final draft of your project. No more
-                            changes will be entertained.</p>
-                    </div>
 
-                    <div class="text-center my-3">
-                        <a href="https://via.placeholder.com/2000x3000" target="_blank">
-                            <img class="img-fluid" src="https://via.placeholder.com/2000x3000"
-                                alt="Image not found"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- STATUS: First Draft -->
-        <div class="modal fade" id="docFIRST_DRAFT" tabindex="-1" aria-labelledby="statusFirstDraftLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered custom-modal-width">
-                <div class="modal-content card custom-modal-container">
-                    <div class="d-flex justify-content-between mb-4">
-                        <h5 class="modal-title" id="statusFirstDraftLabel">First Draft</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span class="cross" aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="d-flex">
-                        <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                        <p class="info" style="line-height: 1.15rem;">This is where the user can view their first draft and provide feedback on the same.</p>
-                    </div>
-                    <div class="d-flex">
-                        <a class="custom-button my-2">Choose File</a>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5 my-3">
-                            <div class="text-center">
-                                <a href="https://via.placeholder.com/2000x3000" target="_blank">
-                                    <img class="img-fluid" src="https://via.placeholder.com/2000x3000"
-                                        alt="Image not found">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-7 my-3">
-                            <h6>Feedback</h6>
-                            <textarea class="fullWidthTextArea" disabled rows="7"></textarea>
-                            <div class="d-flex flex-btn-wrap">
-                                <a class="custom-button my-2 mr-3">Make Changes</a>
-                                <a class="custom-button my-2">Finalize Draft</a>
-                            </div>
-                            <div class="d-flex">
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
+
 
         <!-- Payment Info -->
         <div class="modal fade" id="paymentInfo" tabindex="-1" aria-labelledby="paymentInfoLabel" aria-hidden="true">
@@ -367,7 +450,11 @@
             </div>
         </div>
 
+
     </div>
+
+
+
 
     <footer class="footer mt-auto py-3">
         <div class="custom-container d-flex justify-content-between">
@@ -375,6 +462,10 @@
             <div class="text-white">DESIGN & DEVELOP BY ONEBIGBIT TECHNOLOGIES PVT. LTD.</div>
         </div>
     </footer>
+
+
+
+
 
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/popper.min.js"></script>

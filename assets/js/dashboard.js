@@ -21,6 +21,7 @@ var documentRegisterObj = {
 $(document).ready(function() {
     if (!AUTH_TOKEN)
         location.href = API.getBaseURL('/login.html');
+    getSampleDocument();
     getDocumentList();
 })
 
@@ -106,6 +107,7 @@ $('#submitDoc select[name=serviceType]').on('change', function() {
     }
 })
 
+
 const getDocumentList = function(filter) {
 
     documentListObj.priority = filter;
@@ -129,7 +131,7 @@ const getDocumentList = function(filter) {
                         var uploadDate = new Date(element.uploadDate);
                         uploadDate = uploadDate.toLocaleDateString().replaceAll("/", "-");
     
-                        $body.append(` <tr> <th scope="row">${element.documentID}</th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td>${uploadDate}</td> <td>${element.progress}%</td> <td>${element.pages}</td> <td>${element.tentativePages}</td> <td>${element.finalPages}</td> <td data-toggle="modal" class="doc${element.status}" data-target="#doc${element.status}">${status}</td> <td data-toggle="modal" data-target="#paymentInfo" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> </tr>`)
+                        $body.append(` <tr> <th class="${element.notifyUser === true ? "notify" : ""}" scope="row"><a title="Click to download original Document" href="${API.getAPIEndPoint('/file/download?fileName=' + element.file.name)}">${element.documentID}</th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td>${uploadDate}</td> <td>${element.progress}%</td> <td>${element.pages}</td> <td>${element.tentativePages}</td> <td>${element.finalPages}</td> <td data-toggle="modal" class="doc${element.status}" data-target="#doc${element.status}">${status}</td> <td data-toggle="modal" data-target="#paymentInfo" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> </tr>`)
                     });
                 }
             } 
@@ -212,5 +214,19 @@ const validateFields = function() {
         }
     })
     return validated;
+}
+
+const getSampleDocument = function() {
+    $.ajax({
+        type: "GET",
+        url: API.getAPIEndPoint("/admin/sample"),
+        success: function(data) {
+            if (data.status === true) {
+                $("#sampleDoc").find('a.sample-doc').attr('href', API.getAPIEndPoint('/file/download?fileName=') + data.message);
+            } else {
+                $("#sampleDoc").find('a.sample-doc').css('pointer-events', 'none');
+            }
+        }
+    })
 }
 

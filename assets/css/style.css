@@ -260,6 +260,7 @@ input:checked+.slider:before {
 #statusFinal img {
     /* width: 45%; */
     height: 60vh;
+    max-height: 250px;
 }
 
 

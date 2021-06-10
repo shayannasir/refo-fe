@@ -67,3 +67,16 @@ input {
 #forgotPass p.error {
     line-height: 1.2;
 }
+
+/* Admin Login */
+.admin-login {
+    min-height: 100vh;
+}
+.admin-login #login-bg {
+    background: transparent;
+}
+.admin-login footer {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+}

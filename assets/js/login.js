@@ -21,6 +21,8 @@ $('a.cta-login').on('click', function() {
         return showFieldError($passField, REQUIRED_FIELD_MSG);
     reqObj.password = $passField.val();
 
+    reqObj.grantType = "USER";
+
     $.ajax({
         type: "POST",
         url: API.getAPIEndPoint('/user/login'),
@@ -107,6 +109,7 @@ const saveUserSession = function(data, rememberMe) {
             if (rememberMe) {
                 document.cookie = "authToken=" + data.token + ";" + " max-age=" + COOKIE_LIFE;
                 document.cookie = "user=" + data.user.name + ";" + " max-age=" + COOKIE_LIFE;
+                document.cookie = "role=" + data.user.role + ";" + " max-age=" + COOKIE_LIFE;
             }
         }
     }

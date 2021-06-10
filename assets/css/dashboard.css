@@ -9,8 +9,9 @@ table thead {
     border-bottom: solid 1px #c6213fad;
 }
 
-table thead th {
-    color: #C6213F;
+table thead th,
+table tbody th a {
+    color: #C6213F !important;
     font-size: 0.8rem;
     text-align: center;
 }
@@ -79,4 +80,92 @@ text {
 #submitDoc .file-group p.error {
     margin-left: 10px;
     margin-top: 6px;
+}
+/* For forced responsive */
+@media(max-width: 800px) {
+    body {
+        width: 1000px;
+    }
+}
+h1.filter-dropdown {
+    font-weight: 600;
+}
+#uploadDoc .priroty-wrap {
+    justify-content: center;
+}
+.table tbody tr {
+    position: relative;
+}
+.table tbody th.notify::before {
+    content: "";
+    height: 6px;
+    width: 6px;
+    background-color: #C6213F;
+    position: absolute;
+    left: 2px;
+    top: 20px;
+    border-radius: 5px;
+}
+/* Admin Dashboard */
+.admin-dashboard .truncate {
+    width: 222px;
+}
+.admin-dashboard table tbody tr {
+    font-size: 0.8rem;
+}
+.admin-dashboard .custom-button-small {
+    padding: 0.4rem 1rem !important;
+}
+.admin-dashboard table tbody tr.editable td:nth-child(3) span,
+.admin-dashboard table tbody tr.editable td:nth-child(4) span,
+.admin-dashboard table tbody tr.editable td:nth-child(5) span {
+    border: 2px solid #C6213F;
+    padding: 5px 10px;
+    margin: -5px 0px;
+    display: inline-block;
+    border-radius: 5px;
+}
+.admin-dashboard .flex-btn-wrap {
+    position: absolute;
+    bottom: 0;
+}
+.admin-dashboard .flex-btn-wrap .custom-button {
+    padding: 0.5rem 1.7rem !important;
+}
+#sampleDoc input[type=file]::file-selector-button {
+    background: transparent linear-gradient(71deg, #C6213F 0%, #BB1019 100%) 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    margin-right: 20px;
+}
+#sampleDoc .d-flex {
+    align-items: center;
+}
+#sampleDoc .file-control {
+    border: none !important;
+    padding-left: 0;
+    height: 60px;
+    font-size: 13px;
+    width: fit-content;
+}
+#sampleDoc span.remove-file {
+    font-weight: 600;
+    color: #C6213F;
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+#sampleDoc p.error {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+}
+#updateDoc .modal-content p {
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #6e6e6e;
+}
+#updateDoc .modal-content p span {
+    color: #C6213F;
 }

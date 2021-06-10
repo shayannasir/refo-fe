@@ -57,6 +57,8 @@ if (LOCAL.url.indexOf(location.hostname)> -1)
 else if (UAT.url.indexOf(location.hostname) > -1)
     CURRENT = UAT;
 
+const IS_ADMIN = location.href.indexOf('admin') > -1 ? true : false; 
+var PREFIX = IS_ADMIN ? "admin_" : "";
 
 // HELPER CLASSES
 class API_INIT {
@@ -67,11 +69,11 @@ class API_INIT {
         this.getAPIEndPoint = function (relativeURL) {
             return encodeURI(endpoint + relativeURL);
         };
-
         this.getBaseURL = function (relativeURL) {
             return encodeURI(baseURL + relativeURL);
         };
         this.getToken = function () {
+            
             if (AUTH_TOKEN && AUTH_TOKEN.length > 100)
                 return "Bearer " + AUTH_TOKEN;
             return false;
@@ -139,29 +141,38 @@ const showAjaxError = function(data) {
     }
 }
 const tokenInStorage = function() {
-    var token = localStorage.getItem('token');
+    var token = localStorage.getItem(PREFIX + 'token');
     if (!token || !token.length > 100)
         return false;
     return token;
 }
 const tokenInCookie = function() {
-    if (document.cookie.split(';').some((item) => item.trim().startsWith('authToken='))) {
-        var token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('authToken='))
-        .split('=')[1];
-        if (!token || !token.length > 100)
+    if (document.cookie.split(';').some((item) => item.trim().startsWith(PREFIX + 'authToken='))) {
+        var token = document.cookie.split('; ').find(row => row.startsWith(PREFIX + 'authToken=')).split('=')[1];
+        var user = document.cookie.split('; ').find(row => row.startsWith(PREFIX + 'user=')).split('=')[1];
+        var role = document.cookie.split('; ').find(row => row.startsWith(PREFIX + 'role=')).split('=')[1];
+
+        if (!token || !user || !role)
             return false;
+        localStorage.setItem(PREFIX + USER.name, user);
+        localStorage.setItem(PREFIX + USER.role, role)
+        localStorage.setItem(PREFIX + USER.token, token);
         return token;
     } else
         return false;
 }
 const logout = function() {
-    document.cookie = "authToken='';max-age=-1";
-    document.cookie = "user='';max-age=-1";
-    localStorage.clear();
+    document.cookie = PREFIX + "authToken='';max-age=-1";
+    document.cookie = PREFIX + "user='';max-age=-1";
+    document.cookie = PREFIX + "role='';max-age=-1";
+    localStorage.removeItem(PREFIX + USER.email);
+    localStorage.removeItem(PREFIX + USER.name);
+    localStorage.removeItem(PREFIX + USER.isPublished);
+    localStorage.removeItem(PREFIX + USER.role)
+    localStorage.removeItem(PREFIX + USER.accountEnabled);
+    localStorage.removeItem(PREFIX + USER.token);
     AUTH_TOKEN = false;
-    location.href = API.getBaseURL('/login.html');
+    location.href = API.getBaseURL('/index.html');
 }
 
 // GLOBAL INIT
