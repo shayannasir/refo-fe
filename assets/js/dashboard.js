@@ -18,11 +18,14 @@ var documentRegisterObj = {
     additionalInformation: null
 }
 
+const actionItemsHTML = '<img data-type="yes" class="icon ml-1" src="assets/icons/check-solid.svg"><img data-type="no" class="icon ml-1" src="assets/icons/times-solid.svg">';
+
 $(document).ready(function() {
     if (!AUTH_TOKEN)
         location.href = API.getBaseURL('/login.html');
     getSampleDocument();
     getDocumentList();
+    fetchDelayed();
 })
 
 $('a.cta-logout').on('click', function() {
@@ -107,6 +110,93 @@ $('#submitDoc select[name=serviceType]').on('change', function() {
     }
 })
 
+$(document).on('click', 'td.doc.final', function() {
+    var paymentStatus = $(this).closest('tr').find('.payments').attr('data-status');
+    if (paymentStatus !== "PAID") {
+        $('#finalDoc').find('.jf-1').addClass('display-n');
+        $('#finalDoc').find('.alert').removeClass('display-n');
+    }
+    var finalDoc = $(this).attr('data-final-doc');
+    if (finalDoc && finalDoc.length && finalDoc !== 'null')
+        $('#finalDoc').find('a.final-download').attr('href', API.getAPIEndPoint('/file/download?fileName=' + finalDoc));
+    $('#finalDoc').find('a.final-download').attr('data-status', paymentStatus);
+    $('#finalDoc').modal('show');
+})
+
+$(document).on('click', 'td.doc-actions img', function() {
+    var reqObj = {};
+    var type = $(this).attr('data-type');
+    var docID = $(this).closest('tr').find('th a').html();
+    reqObj['documentID'] = docID;
+    reqObj['action'] = type === "yes" ? true : false;
+    var msg = type === "yes" ? "ACCEPT" : "REJECT";
+    if (confirm("Are you sure you want to " + msg + " ?")) {
+        $.ajax({
+            type: "POST",
+            url: API.getAPIEndPoint('/document/accept'),
+            data: JSON.stringify(reqObj),
+            success: function(data) {
+                if (data.status === true) {
+                    showToast(TOAST.success, data.message)
+                    setTimeout(()=> {
+                        getDocumentList();
+                    }, 500)
+                } else if (data.status === false) {
+                    showAjaxError(data);
+                }
+            }
+        })
+    }
+})
+
+$(document).on('click', '#docFIRST_DRAFT .cta-submit', function() {
+    var reqObj = {};
+    var $target = $(this);
+    reqObj['documentID'] = $(this).attr('data-id');
+    var feedbackField = $(this).closest('.row').find('textarea');
+    if (!feedbackField || !feedbackField.val() || !feedbackField.val().trim())
+        return showFieldError(feedbackField, REQUIRED_FIELD_MSG);
+    reqObj['feedback'] = feedbackField.val();
+    $.ajax({
+        type: "POST",
+        url: API.getAPIEndPoint('/document/feedback'),
+        data: JSON.stringify(reqObj),
+        success: function(data) {
+            if (data.status === true) {
+                showToast(TOAST.success, data.message);
+                $target.closest('#docFIRST_DRAFT').modal('hide');
+                setTimeout(() => {
+                    getDocumentList();
+                }, 500)
+            } else if (data.status === false) {
+                showAjaxError(data);
+            }
+        }
+    })
+})
+
+$(document).on('click', 'td.docFIRST_DRAFT', function() {
+    var docID = $(this).closest('tr').find('th a').html();
+    var draftFile = $(this).attr('data-file');
+    $('#docFIRST_DRAFT').find('.cta-submit').attr('data-id', docID);
+    $('#docFIRST_DRAFT').find('.draft-download').attr('href', API.getAPIEndPoint('/file/download?fileName=' + draftFile));
+    $('#docFIRST_DRAFT').modal('show');
+})
+
+$(document).on('hidden.bs.modal', '#docFIRST_DRAFT', function () {
+    $(this).find('input[type=file]').val('')
+    $(this).find('textarea').val('')
+    $(this).find('p.error').remove();
+    $(this).find('.cta-submit').removeAttr('data-id');
+    $(this).find('.draft-download').attr('href', 'javascript:void(0)');
+});
+
+$(document).on('hidden.bs.modal', '#finalDoc', function () {
+    $(this).find('.final-download').removeAttr('data-status');
+    $(this).find('.final-download').attr('href', 'javascript:void(0)');
+    $(this).find('.jf-1').removeClass('display-n');
+    $(this).find('.alert').addClass('display-n');
+});
 
 const getDocumentList = function(filter) {
 
@@ -130,8 +220,12 @@ const getDocumentList = function(filter) {
     
                         var uploadDate = new Date(element.uploadDate);
                         uploadDate = uploadDate.toLocaleDateString().replaceAll("/", "-");
+                        var isActionbleItems = element.status === STATUS.pending && element.notifyUser === true;
+                        var isDraft = element.status === STATUS.draft && element.notifyUser === true;
+                        var isFInal = element.status === STATUS.final;
     
-                        $body.append(` <tr> <th class="${element.notifyUser === true ? "notify" : ""}" scope="row"><a title="Click to download original Document" href="${API.getAPIEndPoint('/file/download?fileName=' + element.file.name)}">${element.documentID}</th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td>${uploadDate}</td> <td>${element.progress}%</td> <td>${element.pages}</td> <td>${element.tentativePages}</td> <td>${element.finalPages}</td> <td data-toggle="modal" class="doc${element.status}" data-target="#doc${element.status}">${status}</td> <td data-toggle="modal" data-target="#paymentInfo" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> </tr>`)
+                        $body.append(` <tr> <th class="${element.notifyUser === true ? "notify" : ""}" scope="row"><a title="Click to download original Document" href="${API.getAPIEndPoint('/file/download?fileName=' + element.file.name)}">${element.documentID}</th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td>${uploadDate}</td> <td>${element.progress}%</td> <td>${element.pages}</td> <td class="action doc-actions">${element.tentativePages}${isActionbleItems ? actionItemsHTML : ""}</td> <td>${element.finalPages}</td> <td data-file="${isDraft && element.firstPage && element.firstPage.name ? element.firstPage.name : ""}" class="doc${isDraft ? element.status : ""} ${isFInal ? 'final' : ""} status" data-final-doc="${element.finalDraft && element.finalDraft.name ? element.finalDraft.name : ""}">${status}</td> <td data-toggle="modal" data-target="#paymentInfo" data-status="${element.paymentStatus}" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> </tr>`)
+
                     });
                 }
             } 
@@ -230,3 +324,18 @@ const getSampleDocument = function() {
     })
 }
 
+const fetchDelayed = function() {
+    $.ajax({
+        type: "GET",
+        url: API.getAPIEndPoint('/admin/get/delayed'),
+        async: false,
+        success: function(data) {
+            if (data) {
+                if (data.isDelayed) {
+                    $('#uploadDoc').find('.regular').addClass('display-n');
+                    $('#uploadDoc').find('.delayed').removeClass('display-n');
+                }
+            }
+        }
+    })
+}

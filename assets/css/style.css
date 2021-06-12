@@ -119,6 +119,7 @@ table tbody tr {
 .modal .info {
     font-size: 0.9rem;
     line-height: 1.8rem;
+    text-align: left;
 }
 
 .modal .copyCode {
@@ -316,6 +317,23 @@ input:checked+.slider:before {
 
 }
 
+#uploadDoc .type.delayed {
+    border: solid #777777 6px;
+    border-radius: 20px;
+    color: #777777;
+
+}
+
+#uploadDoc .delayed .delayed-inner {
+    padding: 2rem 2rem 0 2rem;
+
+}
+
+#uploadDoc .delayed .select {
+    background-color: #777777;
+
+}
+
 #uploadDoc .type.urgent {
     border: solid #F68C00 6px;
     border-radius: 20px;
@@ -424,8 +442,8 @@ select:focus {
     font-size: 0.9rem;
 }
 p.error {
-    color: firebrick;
-    font-size: 0.8rem;
+    color: firebrick !important;
+    font-size: 0.8rem !important;
 }
 p.success {
     color: darkgreen;
@@ -454,8 +472,11 @@ input::-webkit-inner-spin-button {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
+}
+img.icon {
+    height: 14px;
+    width: 14px;
+}
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;

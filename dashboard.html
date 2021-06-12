@@ -186,6 +186,13 @@
                             </div>
                             <div class="select">SELECT</div>
                         </div>
+                        <div class="type delayed text-center mr-3 display-n" data-priority="DELAYED">
+                            <div class="delayed-inner">
+                                <h3>DELAYED</h3>
+                                <p>Delivery in 8 - 10 business days.</p>
+                            </div>
+                            <div class="select">SELECT</div>
+                        </div>
                         <div class="type urgent text-center mr-3" data-priority="URGENT">
                             <div class="urgent-inner">
                                 <h3>URGENT</h3>
@@ -288,17 +295,8 @@
             </div>
         </div>
 
-
-
-
-        <!-- Upload Document: URGENT -->
-        <!-- LEFT -->
-
-
-
-
         <!-- STATUS: Final -->
-        <div class="modal fade" id="docFINAL" tabindex="-1" aria-labelledby="statusFinalLabel" aria-hidden="true">
+        <div class="modal fade" id="finalDoc" tabindex="-1" aria-labelledby="statusFinalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered custom-modal-width">
                 <div class="modal-content card custom-modal-container">
                     <div class="d-flex justify-content-between mb-4">
@@ -309,14 +307,14 @@
                     </div>
                     <div class="d-flex">
                         <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                        <p class="info">This is the final draft of your project. No more
+                        <p class="info jf-1">This is the final draft of your project. No more
                             changes will be entertained.</p>
                     </div>
-
+                    <p class="alert display-n">Please clear the remaining Payment to access the Final Draft.</p>
                     <div class="text-center my-3">
-                        <a href="https://via.placeholder.com/2000x3000" target="_blank">
-                            <img class="img-fluid" src="https://via.placeholder.com/2000x3000"
-                                alt="Image not found"></a>
+                        <a href="javascript:void(0)" class="final-download jf-1">
+                            <img class="img-fluid sample-image" src="https://i.ibb.co/4txs7Tr/png-transparent-pdf-thumbnail-computer-icons-pdf-pdf-miscellaneous-angle-text-thumbnail-png.png"
+                                alt="Click to download"></a>
                     </div>
                 </div>
             </div>
@@ -342,15 +340,17 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-5 my-3">
                             <div class="text-center">
-                                <a href="https://via.placeholder.com/2000x3000" target="_blank">
-                                    <img class="img-fluid" src="https://via.placeholder.com/2000x3000"
-                                        alt="Image not found">
-                                </a>
+                                <a href="javascript:void(0)" class="draft-download">
+                                    <img class="img-fluid sample-image" src="https://i.ibb.co/4txs7Tr/png-transparent-pdf-thumbnail-computer-icons-pdf-pdf-miscellaneous-angle-text-thumbnail-png.png"
+                                        alt="Click to download"></a>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-7 my-3">
                             <h6>Feedback</h6>
                             <textarea class="fullWidthTextArea" rows="5"></textarea>
+                            <div class="d-flex flex-btn-wrap">
+                                <a class="custom-button my-2 cta-submit">SUBMIT</a>
+                            </div>
                         </div>
                     </div>
 
@@ -359,7 +359,7 @@
         </div>
 
 
-        <!-- Payment Info -->
+        <!-- Payment Info (pending integration) -->
         <div class="modal fade" id="paymentInfo" tabindex="-1" aria-labelledby="paymentInfoLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered custom-modal-width">
                 <div class="modal-content card custom-modal-container">

@@ -172,15 +172,15 @@
                         </label>
                         <div>
                             <label for="date">Date until deactive</label>
-                            <input type="date" class="form-control" id="date">
+                            <input type="date" class="form-control" disabled id="date">
                         </div>
                         <div>
                             <label for="time">Time until deactive</label>
-                            <input type="time" class="form-control" id="time">
+                            <input type="time" class="form-control" disabled id="time">
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-5">
-                        <a href="#" class="custom-button">Confirm</a>
+                        <a href="javascript:void(0)" class="custom-button cta-submit disable-btn">Confirm</a>
                     </div>
 
 
@@ -209,8 +209,39 @@
             </div>
         </div>
 
-        <!-- Upload File -->
-        <div class="modal fade" id="uploadFile" tabindex="-1" aria-labelledby="uploadFileLabel" aria-hidden="true">
+        <!-- Upload First Draft File -->
+        <div class="modal fade" id="uploadDraftFile" tabindex="-1" aria-labelledby="uploadFileLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered custom-modal-width">
+                <div class="modal-content card custom-modal-container">
+                    <div class="d-flex justify-content-between mb-4">
+                        <h5 class="modal-title" id="uploadFileLabel">Upload First Draft</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="cross" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="d-flex file-group">
+                        <input type="file" class="form-control file-control" name="file" data-type="SAMPLE">
+                        <span class="remove-file">X</span>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-sm-12 col-md-9">
+                            <div class="d-flex">
+                                <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                                <p class="info" style="line-height: 1.15rem;">Please upload the First Draft of the Document for the User to verify.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-3">
+                            <a href="javascript:void(0)" class="custom-button pull-right cta-submit">Confirm</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Final File -->
+        <!-- <div class="modal fade" id="finalDocUpload" tabindex="-1" aria-labelledby="uploadFileLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered custom-modal-width">
                 <div class="modal-content card custom-modal-container">
                     <div class="d-flex justify-content-between mb-4">
@@ -219,9 +250,11 @@
                             <span class="cross" aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="d-flex">
-                        <a class="custom-button my-2">Choose File</a>
+                    <div class="d-flex file-group">
+                        <input type="file" class="form-control file-control" name="file" data-type="SAMPLE">
+                        <span class="remove-file">X</span>
                     </div>
+                    <div class="row"> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Progress</label> <input type="number" value="${element.progress}" class="form-control" regex="^[0-9]{1,3}$" regexMessage="Please enter valid percentage" name="progress"> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Tentative Pages</label> <input type="number" value="${element.tentativePages}" class="form-control" name="tentativePages"> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Final Pages</label> <input type="number" class="form-control" value="${element.finalPages}" name="finalPages"> </div> </div>
                     <div class="row my-4">
                         <div class="col-sm-12 col-md-9">
                             <div class="d-flex">
@@ -240,10 +273,10 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- STATUS: Final -->
-        <div class="modal fade" id="docFINAL" tabindex="-1" aria-labelledby="statusFinalLabel" aria-hidden="true">
+        <!-- STATUS: Final Not in use currently-->
+        <!-- <div class="modal fade" id="docFINAL" tabindex="-1" aria-labelledby="statusFinalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered custom-modal-width">
                 <div class="modal-content card custom-modal-container">
                     <div class="d-flex justify-content-between mb-4">
@@ -265,42 +298,42 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- STATUS: First Draft -->
-        <div class="modal fade" id="docFIRST_DRAFT" tabindex="-1" aria-labelledby="statusFirstDraftLabel"
+        <!-- STATUS: Feedback Draft -->
+        <div class="modal fade" id="draftFeedback" tabindex="-1" aria-labelledby="statusFirstDraftLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered custom-modal-width">
                 <div class="modal-content card custom-modal-container">
                     <div class="d-flex justify-content-between mb-4">
-                        <h5 class="modal-title" id="statusFirstDraftLabel">First Draft</h5>
+                        <h5 class="modal-title" id="statusFirstDraftLabel">First Draft Feedback</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span class="cross" aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="d-flex">
                         <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                        <p class="info" style="line-height: 1.15rem;">This is where the user can view their first draft and provide feedback on the same.</p>
+                        <p class="info" style="line-height: 1.15rem;">Below is the Feedback from the User based on the First Draft provided.</p>
                     </div>
-                    <div class="d-flex">
-                        <a class="custom-button my-2">Choose File</a>
+                    <div class="d-flex file-group">
+                        <input type="file" class="form-control file-control" name="file" data-type="SAMPLE">
+                        <span class="remove-file">X</span>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-12 col-md-5 my-3">
                             <div class="text-center">
-                                <a href="https://via.placeholder.com/2000x3000" target="_blank">
-                                    <img class="img-fluid" src="https://via.placeholder.com/2000x3000"
-                                        alt="Image not found">
-                                </a>
+                                <a href="javascript:void(0)" class="draft-download">
+                                    <img class="img-fluid sample-image" src="https://i.ibb.co/4txs7Tr/png-transparent-pdf-thumbnail-computer-icons-pdf-pdf-miscellaneous-angle-text-thumbnail-png.png"
+                                        alt="Click to download"></a>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-7 my-3">
                             <h6>Feedback</h6>
-                            <textarea class="fullWidthTextArea" disabled rows="7"></textarea>
+                            <textarea class="fullWidthTextArea" disabled rows="5"></textarea>
                             <div class="d-flex flex-btn-wrap">
-                                <a class="custom-button my-2 mr-3">Make Changes</a>
-                                <a class="custom-button my-2">Finalize Draft</a>
+                                <a class="custom-button my-2 mr-3 cta-submit cta-changes">Make Changes</a>
+                                <a class="custom-button my-2 cta-submit cta-finalize">Finalize Draft</a>
                             </div>
                             <div class="d-flex">
                             </div>

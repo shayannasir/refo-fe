@@ -36,6 +36,14 @@ const PAY_STATUS = {
     PARTIALLY_PAID: "Partially Paid",
     PAID: "Paid"
 }
+const STATUS = {
+    pending: "PENDING",
+    accepted: "ACCEPTED",
+    declined: "DECLINED",
+    draft: "FIRST_DRAFT",
+    final: "FINAL",
+    delivered: "DELIVERED"
+}
 
 const REQUIRED_FIELD_MSG = "This field is mandatory";
 const INVALID_EMAIL_MSG = "Please enter a valid EMAIL";
