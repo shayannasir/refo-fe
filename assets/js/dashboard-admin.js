@@ -43,6 +43,9 @@ $(document).on('change', 'input[type=file][name=file]', function() {
     formData.append('file', files);
     if (files) {
         $.ajax({
+            beforeSend: function() {
+                showToast(TOAST.info, "Uploading File...");
+            },
             type: "POST",
             url: API.getAPIEndPoint('/file/upload'),
             data: formData,
