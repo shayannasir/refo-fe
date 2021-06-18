@@ -318,9 +318,9 @@ input:checked+.slider:before {
 }
 
 #uploadDoc .type.delayed {
-    border: solid #777777 6px;
+    border: solid darkred 6px;
     border-radius: 20px;
-    color: #777777;
+    color: darkred;
 
 }
 
@@ -330,7 +330,7 @@ input:checked+.slider:before {
 }
 
 #uploadDoc .delayed .select {
-    background-color: #777777;
+    background-color: darkred;
 
 }
 

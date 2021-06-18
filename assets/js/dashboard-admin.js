@@ -11,8 +11,8 @@ var updateObj = {};
 
 const uploadDraftFileHTML = '<td class="action" ><a href="javascript:void(0)" class="draft-upload custom-button custom-button-small">Upload File</a></td>';
 const uploadFileHTML = '<td class="action" ><a data-toggle="modal" data-target="#uploadFile" href="javascript:void(0)" class="custom-button custom-button-small">Upload File</a></td>';
-const actionItemsHTML = '<td class="action doc-actions icons"><img data-type="yes" class="icon mr-3" src="../assets/icons/check-solid.svg"><img data-type="no" class="icon" src="../assets/icons/times-solid.svg"></td>';
 const emptyHTML = '<td class="action"></td>';
+const actionItemsHTML = '<img data-type="yes" class="icon ml-1" src="../assets/icons/check-solid.svg"><img data-type="no" class="icon ml-1" src="../assets/icons/times-solid.svg">';
 
 var DELAYED = {
     isDelayed: false,
@@ -301,6 +301,21 @@ $(document).on('hidden.bs.modal', '#draftFeedback', function () {
     $(this).find('.file-control').removeAttr('data-filename');
 });
 
+$(document).on('hidden.bs.modal', '#delayed', function () {
+    var isDelayed = $('#delayed').find('input[type=checkbox]').attr('data-value') === "true";
+    if (isDelayed) {
+        $('#delayed').find('input[type=checkbox]').get(0).checked = true;
+        $('#delayed').find('input[type=checkbox]').trigger('change');
+        var delayDate = $('#delayed').find('input[type=date]').attr('data-value');
+        $('#delayed').find('input[type=date]').val(delayDate);
+        var delayTime = $('#delayed').find('input[type=time]').attr('data-value');
+        $('#delayed').find('input[type=time]').val(delayTime);
+    } else {
+        $('#delayed').find('input[type=checkbox]').get(0).checked = true;
+        $('#delayed').find('input[type=checkbox]').trigger('change');
+    }
+});
+
 $('#delayed').on('change', 'input[type=checkbox]', function() {
     if ($(this).is(':checked')) {
         $(this).closest('.modal-content').find('input').removeAttr('disabled')
@@ -341,6 +356,68 @@ $('#delayed').on('click', '.cta-submit', function() {
             }
         }
     })
+})
+
+$(document).on('change', 'input.inline-field', function() {
+    var type = $(this).attr('data-type');
+    var value = $(this).val();
+    if (type === "progress") {
+        var regex = new RegExp(/^[0-9]{1,3}$/)
+        if (!regex.test(value) || Number(value) > 100 || !Number(value)) {
+            $(this).val($(this).attr('value'))
+            showToast(TOAST.error, PROGRESS_INVALID);
+            return false;
+        }
+    } else if (type === "tentativePages") {
+        var regex = new RegExp(/^[0-9]+$/);
+        if (!regex.test(value) || !Number(value)) {
+            $(this).val($(this).attr('value'))
+            showToast(TOAST.error, PAGE_INVALID);
+            return false;
+        }
+    }
+    var obj = {
+        documentID: $(this).attr('data-id'),
+        field: type,
+        value: Number(value)
+    }
+    $.ajax({
+        type: "POST",
+        url: API.getAPIEndPoint('/admin/document/details'),
+        data: JSON.stringify(obj),
+        success: function(data) {
+            if (data.status === true && data.message) {
+                showToast(TOAST.success, data.message);
+                getDocumentList()
+            } else if (data.status === false) {
+                showAjaxError(data);
+            }
+        }
+    })
+})
+
+$(document).on('click', 'td img.icon', function() {
+    var reqObj = {};
+    var type = $(this).attr('data-type');
+    var docID = $(this).closest('tr').find('th a').html();
+    reqObj['documentID'] = docID;
+    reqObj['action'] = type === "yes" ? true : false;
+    var msg = type === "yes" ? "ACCEPT" : "REJECT";
+    if (confirm("Are you sure you want to " + msg + " ?")) {
+        $.ajax({
+            type: "POST",
+            url: API.getAPIEndPoint('/admin/document/accept'),
+            data: JSON.stringify(reqObj),
+            success: function(data) {
+                if (data.status === true) {
+                    showToast(TOAST.success, data.message)
+                    getDocumentList();
+                } else if (data.status === false) {
+                    showAjaxError(data);
+                }
+            }
+        })
+    }
 })
 
 const validateFields = function($parent, obj) {
@@ -454,16 +531,15 @@ const getDocumentList = function(filter) {
                         if (isDraftFeedback)
                             localStorage.setItem(element.documentID, element.feedback);
 
-                        var isEditableField = element.status === STATUS.pending && element.notifyUser === false;
-
-                        var editNumbersModalData = ` <div class="modal fade" id="updateDoc" tabindex="-1" aria-labelledby="uploadDocRegularLabel" aria-hidden="true"> <div class="modal-dialog modal-dialog-centered custom-modal-width"> <div class="modal-content card custom-modal-container"> <div class="d-flex justify-content-between mb-4"> <h5 class="modal-title" id="uploadDocRegularLabel">Update Document Details</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="cross" aria-hidden="true">&times;</span> </button> </div><p class="docTitle">Document ID: <span>${element.documentID}</span></p> <form data-id="${element.documentID}"> <div class="row"> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Progress</label> <input type="number" value="${element.progress}" class="form-control" regex="^[0-9]{1,3}$" regexMessage="Please enter valid percentage" name="progress"> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Tentative Pages</label> <input type="number" value="${element.tentativePages}" class="form-control" name="tentativePages"> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Final Pages</label> <input type="number" class="form-control" value="${element.finalPages}" name="finalPages"> </div> </div> </div> <a class="custom-button pull-right cta-submit" href="javascript:void(0)">Confirm</a> </form> </div> </div> </div>`;
+                        var isActiveInlineEditingProgress = element.status !== STATUS.final && element.status !== STATUS.delivered && element.status !== STATUS.withdrawn && element.status !== STATUS.declined;
+                        var isActiveInlineEditingTentative = element.status === STATUS.pending || element.status === STATUS.accepted;
+                        var hasActionItem = element.status === STATUS.pending && element.notifyUser === false;
 
                         var finalUploadModal = ` <div class="modal fade" id="finalDocUpload" tabindex="-1" aria-labelledby="uploadFileLabel" aria-hidden="true"> <div class="modal-dialog modal-dialog-centered custom-modal-width"> <div class="modal-content card custom-modal-container"> <div class="d-flex justify-content-between mb-4"> <h5 class="modal-title" id="uploadFileLabel">Upload File</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="cross" aria-hidden="true">&times;</span> </button> </div> <div class="d-flex file-group"> <input type="file" class="form-control file-control" name="file" data-type="SAMPLE"> <span class="remove-file">X</span> </div> <div class="row"> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Progress</label> <input type="number" value="${element.progress}" class="form-control" regex="^[0-9]{1,3}$" regexMessage="Please enter valid percentage" name="progress"> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Tentative Pages</label> <input type="number" value="${element.tentativePages}" class="form-control" name="tentativePages" disabled readonly> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Final Pages</label> <input type="number" class="form-control" value="${element.finalPages}" name="finalPages"> </div> </div> <div class="row my-4"> <div class="col-sm-12 col-md-9"> <div class="d-flex"> <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i> <p class="info" style="line-height: 1.15rem;">By clicking Send, the uploaded documents will be delivered to the respective customer’s registered email.</p> </div> </div> <div class="col-sm-12 col-md-3"> <a href="javascript:void(0)" class="custom-button pull-right cta-submit" data-id="${element.documentID}">Confirm</a> </div> </div> </div> </div> </div>`;
 
-                        var rowData = `<tr class="${element.documentID}"> <th class="${element.notifyUser !== true ? "notify" : ""}" scope="row"><a title="Click to download original Document" href="${API.getAPIEndPoint('/file/download?fileName=' + element.file.name)}">${element.documentID}</a></th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td class="" ><span>${element.progress}%</span></td> <td class="${isEditableField === true ? "editable editable-field": ""}" title="${isEditableField === true ? "Click to Update" : ""}" ><span>${element.tentativePages}</span></td> <td class="" ><span>${element.finalPages}</span></td> <td>${element.userEmail}</td> <td data-toggle="modal" data-target="#paymentInfo" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> <td data-toggle="modal" data-file="${isDraftFeedback && element.firstPage && element.firstPage.name ? element.firstPage.name : ""}" class="${isDraftFeedback ? "draft-feedback" : ""} ${element.status === STATUS.accepted ? 'draft-upload': ""} status" data-target="#doc${element.status}">${status}</td></tr>`;
+                        var rowData = `<tr class="${element.documentID}"> <th class="${element.notifyUser !== true ? "notify" : ""}" scope="row"><a title="Click to download original Document" href="${API.getAPIEndPoint('/file/download?fileName=' + element.file.name)}">${element.documentID}</a></th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td class="${isActiveInlineEditingProgress === true ? "editable editable-field": ""}" ><div>${isActiveInlineEditingProgress ? '<input type="number" class="inline-field" data-id="'+ element.documentID +'" data-type="progress" value="' + element.progress + '">' : '<span>' + element.progress + '</span>'}%</div></td> <td class="${isActiveInlineEditingTentative === true ? "editable editable-field": ""}" ><div>${isActiveInlineEditingTentative ? '<input type="number" class="inline-field" data-id="'+ element.documentID +'" data-type="tentativePages" value="' + element.tentativePages + '">' : '<span>' + element.tentativePages + '</span>'}</div></td> <td class="" ><span>${element.finalPages}</span></td> <td>${element.userEmail}</td> <td data-toggle="modal" data-target="#paymentInfo" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> <td data-toggle="modal" data-file="${isDraftFeedback && element.firstPage && element.firstPage.name ? element.firstPage.name : ""}" class="${isDraftFeedback ? "draft-feedback" : ""} ${element.status === STATUS.approved ? 'draft-upload': ""} status" data-target="#doc${element.status}">${status}${hasActionItem ? actionItemsHTML : ""}</td></tr>`;
     
                         $body.append(rowData);
-                        $body.find('tr').last().append(editNumbersModalData);
                         $body.find('tr').last().append(finalUploadModal);
 
                     });
@@ -511,13 +587,14 @@ const fetchDelayed = function() {
                 DELAYED.delayedEndDate = data.delayedEndDate
 
                 if (data.isDelayed) {
+                    $('#delayed').find('input[type=checkbox]').attr('data-value', data.isDelayed)
                     $('#delayed').find('input[type=checkbox]').get(0).checked = true;
                     $('#delayed').find('input[type=checkbox]').trigger('change')
                     if (data.delayedEndDate) {
                         var delayDate = new Date(data.delayedEndDate);
-                        $('#delayed').find('input[type=date]').val(formatDateForHTML(delayDate));
+                        $('#delayed').find('input[type=date]').attr('data-value', formatDateForHTML(delayDate)).val(formatDateForHTML(delayDate));
                         var delayTime = delayDate.toString().split(" ")[4];
-                        $('#delayed').find('input[type=time]').val(delayTime);
+                        $('#delayed').find('input[type=time]').attr('data-value', delayTime).val(delayTime);
                     }
                 }
             }

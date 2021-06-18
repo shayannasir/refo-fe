@@ -132,7 +132,7 @@ $(document).on('click', 'td.doc-actions img', function() {
     var docID = $(this).closest('tr').find('th a').html();
     reqObj['documentID'] = docID;
     reqObj['action'] = type === "yes" ? true : false;
-    var msg = type === "yes" ? "ACCEPT" : "REJECT";
+    var msg = type === "yes" ? "ACCEPT" : "WITHDRAW";
     if (confirm("Are you sure you want to " + msg + " ?")) {
         $.ajax({
             type: "POST",
@@ -223,7 +223,7 @@ const getDocumentList = function(filter) {
     
                         var uploadDate = new Date(element.uploadDate);
                         uploadDate = uploadDate.toLocaleDateString().replaceAll("/", "-");
-                        var isActionbleItems = element.status === STATUS.pending && element.notifyUser === true;
+                        var isActionbleItems = element.status === STATUS.accepted && element.notifyUser === true;
                         var isDraft = element.status === STATUS.draft && element.notifyUser === true;
                         var isFInal = element.status === STATUS.final;
     

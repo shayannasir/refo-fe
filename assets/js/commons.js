@@ -29,7 +29,9 @@ const DOC_STATUS = {
     DECLINED: "Declined",
     FIRST_DRAFT: "First Draft",
     FINAL: "Final",
-    DELIVERED: "Delivered"
+    DELIVERED: "Delivered",
+    WITHDRAWN: "Withdrawn",
+    APPROVED: "Accepted"
 }
 const PAY_STATUS = {
     DUE: "Due",
@@ -42,7 +44,9 @@ const STATUS = {
     declined: "DECLINED",
     draft: "FIRST_DRAFT",
     final: "FINAL",
-    delivered: "DELIVERED"
+    delivered: "DELIVERED",
+    withdrawn: "WITHDRAWN",
+    approved: "APPROVED"
 }
 
 const REQUIRED_FIELD_MSG = "This field is mandatory";
@@ -55,6 +59,8 @@ const OLD_NEW_PASS_SAME = "New Password cannot be same as Old Password";
 const FILE_UPLOAD_SUCCESS = "File Uploaded Successfully";
 const ERRORS_IN_FORM = "There are some errors in the form";
 const PAGE_INVALID = "Please enter valid Page Numbers"
+const PROGRESS_INVALID = "Please enter valid Progress (out of 100)"
+
 var AUTH_TOKEN = false;
 
 

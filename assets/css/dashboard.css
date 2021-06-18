@@ -122,14 +122,24 @@ p.alert {
 .admin-dashboard .custom-button-small {
     padding: 0.4rem 1rem !important;
 }
-.admin-dashboard table tbody tr td.editable:nth-child(3) span,
-.admin-dashboard table tbody tr td.editable:nth-child(4) span,
-.admin-dashboard table tbody tr td.editable:nth-child(5) span {
+.admin-dashboard table tbody tr td.editable div {
     border: 2px solid #C6213F;
-    padding: 5px 10px;
+    padding: 5px 4px;
     margin: -5px 0px;
     display: inline-block;
     border-radius: 5px;
+}
+.admin-dashboard table tbody tr td.editable div input {
+    width: 35px;
+    text-align: center;
+    border: none !important;
+    margin: 1px;
+}
+.admin-dashboard table tbody tr td.editable div input:focus {
+    /* outline: none; */
+}
+.admin-dashboard table tbody tr td.editable div input:focus-visible {
+    border: none !important;
 }
 .flex-btn-wrap {
     position: absolute;
@@ -166,7 +176,7 @@ p.alert {
 #updateDoc .modal-content p span {
     color: #C6213F;
 }
-td.doc-actions .icon {
+.icon {
     cursor: pointer;
 }
 td.draft-upload,
