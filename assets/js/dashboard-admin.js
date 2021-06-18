@@ -311,7 +311,7 @@ $(document).on('hidden.bs.modal', '#delayed', function () {
         var delayTime = $('#delayed').find('input[type=time]').attr('data-value');
         $('#delayed').find('input[type=time]').val(delayTime);
     } else {
-        $('#delayed').find('input[type=checkbox]').get(0).checked = true;
+        $('#delayed').find('input[type=checkbox]').get(0).checked = false;
         $('#delayed').find('input[type=checkbox]').trigger('change');
     }
 });
