@@ -321,7 +321,7 @@ $('#delayed').on('change', 'input[type=checkbox]', function() {
         $(this).closest('.modal-content').find('input').removeAttr('disabled')
         $(this).closest('.modal-content').find('a.cta-submit').removeClass('disable-btn')
     } else {
-        $(this).closest('.modal-content').find('input').attr('disabled', true)
+        $(this).closest('.modal-content').find('input[type=date], input[type=time]').attr('disabled', true)
     }
 })
 
