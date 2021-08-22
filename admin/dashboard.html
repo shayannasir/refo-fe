@@ -125,7 +125,64 @@
                         </button>
                     </div>
 
-                    <div class="row">
+
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#uploadTab" aria-controls="uploadTab" class="active" role="tab" data-toggle="tab">General Discount</a>
+    
+                            </li>
+                            <li role="presentation"><a href="#browseTab" aria-controls="browseTab" role="tab" data-toggle="tab">User Specific Discount</a>
+    
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="uploadTab">
+                                <div class="col-sm-12 col-md-5">
+                                    <label for="user">Discount Percentage</label>
+                                    <input type="number" min="0" class="form-control" id="general-discount">
+                                </div>
+                                <div class="textBackdrop mt-4">
+                                    <p>Default Discount is set to <span class="pull-right disc-amt">20%</span></p>
+                                    <p>Coupon Code: <span class="pull-right disc-coupon"></span></p>
+                                    
+                                </div>
+                                <div class="my-3 custom-border"></div>
+                                <div class="d-flex justify-content-end my-3">
+                                    <a href="#" class="custom-button general-cta-submit">Confirm</a>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="browseTab">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+                                        <label for="user">Select User</label>
+                                        <input type="user" class="form-control" id="user">
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <label for="discount">Percent Discount</label>
+                                        <input type="discount" class="form-control" id="discount">
+                                    </div>
+                                </div>
+                                <div class="my-5 custom-border"></div>
+                                <div class="d-flex justify-content-end my-3">
+                                    <a href="#" class="custom-button user-cta-submit">Confirm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- 
+                    <h6 class="textBackdrop">Default Discount for Referral Codes
+                        <span class="pull-right">20%</span>
+                    </h6>
+                    <div class="d-flex justify-content-end my-3">
+                        <a href="#" class="custom-button">Confirm</a>
+                    </div> -->
+
+
+                    <!-- <div class="row">
                         <div class="col-sm-12 col-md-5">
                             <label for="user">Select User</label>
                             <input type="user" class="form-control" id="user">
@@ -138,17 +195,45 @@
                             <label for="discount">Percent Discount</label>
                             <input type="discount" class="form-control" id="discount">
                         </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="c" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        
+                        </button>
+                         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        
                     </div>
-
-                    <div class="my-5 custom-border"></div>
-
-                    <h6 class="textBackdrop">Default Discount for Referral Codes
-                        <span class="pull-right">20%</span>
-                    </h6>
-                    <div class="d-flex justify-content-end my-3">
-                        <a href="#" class="custom-button">Confirm</a>
+                    <div class="modal-body">
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab">Upload</a>
+        
+                                </li>
+                                <li role="presentation"><a href="#browseTab" aria-controls="browseTab" role="tab" data-toggle="tab">Browse</a>
+        
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="uploadTab">upload Tab</div>
+                                <div role="tabpanel" class="tab-pane" id="browseTab">browseTab</div>
+                            </div>
+                        </div>
                     </div>
-
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary save">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -313,7 +398,7 @@
                     </div>
                     <div class="d-flex">
                         <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                        <p class="info" style="line-height: 1.15rem;">Below is the Feedback from the User based on the First Draft provided.</p>
+                        <p class="info" style="line-height: 1.15rem;">Below is the Feedback from the User based on the <a href="" target="_blank" class="sentDoc">First Draft provided</a> .</p>
                     </div>
                     <div class="d-flex file-group">
                         <input type="file" class="form-control file-control" name="file" data-type="SAMPLE">

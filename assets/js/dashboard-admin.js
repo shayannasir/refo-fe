@@ -24,6 +24,7 @@ $(document).ready(function() {
         location.href = API.getBaseURL('/admin/login.html');
     getDocumentList();
     configureDelayedDate();
+    populateReferralModal();
 })
 
 $('a.cta-logout').on('click', function() {
@@ -164,8 +165,15 @@ $(document).on('click', 'td.draft-upload', function() {
 $(document).on('click', 'td.draft-feedback', function() {
     var docID = $(this).closest('tr').find('th a').html();
     var draftFile = $(this).attr('data-file');
+    var feedbackFile = $(this).attr('data-feedback');
     $('#draftFeedback').find('.cta-submit').attr('data-id', docID);
-    $('#draftFeedback').find('.draft-download').attr('href', API.getAPIEndPoint('/file/download?fileName=' + draftFile));
+    $('#draftFeedback').find('a.sentDoc').attr('href', API.getAPIEndPoint('/file/download?fileName=' + draftFile));
+    if (feedbackFile && feedbackFile.length){
+        $('#draftFeedback').find('.draft-download').attr('href', API.getAPIEndPoint('/file/download?fileName=' + feedbackFile));
+        $('#draftFeedback').find('.draft-download').removeClass('no-doc')
+    } else {
+        $('#draftFeedback').find('.draft-download').addClass('no-doc')
+    }
     $('#draftFeedback').find('textarea').val(localStorage.getItem(docID))
     $('#draftFeedback').modal('show');
 })
@@ -420,6 +428,34 @@ $(document).on('click', 'td img.icon', function() {
     }
 })
 
+$('#referralCode').on('click', '.general-cta-submit', function() {
+    var reqObj = {};
+    var regex = new RegExp(/^[0-9]{1,3}$/)
+    var $target = $(this);
+    var input = $(this).closest('.tab-pane').find('input#general-discount').val();
+
+    if(!input || !input.length || !regex.test(input) || !Number(input) || Number(input) > 100) {
+        alert("Please enter valid discount percentage");
+    } else {
+        reqObj['percentage'] = Number(input);
+        $.ajax({
+            type: "POST",
+            url: API.getAPIEndPoint('/admin/discount/general'),
+            data: JSON.stringify(reqObj),
+            success: function(data) {
+                if (data.status === true) {
+                    showToast(TOAST.success, data.message)
+                    $target.closest('.tab-pane').find('.disc-amt').html(data.data.percent + "%");
+                    $target.closest('.tab-pane').find('.disc-coupon').html(data.data.coupon)
+                } else if (data.status === false) {
+                    showAjaxError(data);
+                }
+            }
+        })
+    }
+
+})
+
 const validateFields = function($parent, obj) {
     var validated = true;
 
@@ -537,7 +573,7 @@ const getDocumentList = function(filter) {
 
                         var finalUploadModal = ` <div class="modal fade" id="finalDocUpload" tabindex="-1" aria-labelledby="uploadFileLabel" aria-hidden="true"> <div class="modal-dialog modal-dialog-centered custom-modal-width"> <div class="modal-content card custom-modal-container"> <div class="d-flex justify-content-between mb-4"> <h5 class="modal-title" id="uploadFileLabel">Upload File</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="cross" aria-hidden="true">&times;</span> </button> </div> <div class="d-flex file-group"> <input type="file" class="form-control file-control" name="file" data-type="SAMPLE"> <span class="remove-file">X</span> </div> <div class="row"> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Progress</label> <input type="number" value="${element.progress}" class="form-control" regex="^[0-9]{1,3}$" regexMessage="Please enter valid percentage" name="progress"> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Tentative Pages</label> <input type="number" value="${element.tentativePages}" class="form-control" name="tentativePages" disabled readonly> </div> </div> <div class="col-sm-12 col-md-4"> <div class="form-group mt-4"> <label for="uploadedPages">Final Pages</label> <input type="number" class="form-control" value="${element.finalPages}" name="finalPages"> </div> </div> <div class="row my-4"> <div class="col-sm-12 col-md-9"> <div class="d-flex"> <i class="mr-2 fa fa-info-circle fa-2x" aria-hidden="true"></i> <p class="info" style="line-height: 1.15rem;">By clicking Send, the uploaded documents will be delivered to the respective customer’s registered email.</p> </div> </div> <div class="col-sm-12 col-md-3"> <a href="javascript:void(0)" class="custom-button pull-right cta-submit" data-id="${element.documentID}">Confirm</a> </div> </div> </div> </div> </div>`;
 
-                        var rowData = `<tr class="${element.documentID}"> <th class="${element.notifyUser !== true ? "notify" : ""}" scope="row"><a title="Click to download original Document" href="${API.getAPIEndPoint('/file/download?fileName=' + element.file.name)}">${element.documentID}</a></th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td class="${isActiveInlineEditingProgress === true ? "editable editable-field": ""}" ><div>${isActiveInlineEditingProgress ? '<input type="number" class="inline-field" data-id="'+ element.documentID +'" data-type="progress" value="' + element.progress + '">' : '<span>' + element.progress + '</span>'}%</div></td> <td class="${isActiveInlineEditingTentative === true ? "editable editable-field": ""}" ><div>${isActiveInlineEditingTentative ? '<input type="number" class="inline-field" data-id="'+ element.documentID +'" data-type="tentativePages" value="' + element.tentativePages + '">' : '<span>' + element.tentativePages + '</span>'}</div></td> <td class="" ><span>${element.finalPages}</span></td> <td>${element.userEmail}</td> <td data-toggle="modal" data-target="#paymentInfo" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> <td data-toggle="modal" data-file="${isDraftFeedback && element.firstPage && element.firstPage.name ? element.firstPage.name : ""}" class="${isDraftFeedback ? "draft-feedback" : ""} ${element.status === STATUS.approved ? 'draft-upload': ""} status" data-target="#doc${element.status}">${status}${hasActionItem ? actionItemsHTML : ""}</td></tr>`;
+                        var rowData = `<tr class="${element.documentID}"> <th class="${element.notifyUser !== true ? "notify" : ""}" scope="row"><a title="Click to download original Document" href="${API.getAPIEndPoint('/file/download?fileName=' + element.file.name)}">${element.documentID}</a></th> <td class="truncate" title="${element.documentName}">${documentName}</td> <td class="${isActiveInlineEditingProgress === true ? "editable editable-field": ""}" ><div>${isActiveInlineEditingProgress ? '<input type="number" class="inline-field" data-id="'+ element.documentID +'" data-type="progress" value="' + element.progress + '">' : '<span>' + element.progress + '</span>'}%</div></td> <td class="${isActiveInlineEditingTentative === true ? "editable editable-field": ""}" ><div>${isActiveInlineEditingTentative ? '<input type="number" class="inline-field" data-id="'+ element.documentID +'" data-type="tentativePages" value="' + element.tentativePages + '">' : '<span>' + element.tentativePages + '</span>'}</div></td> <td class="" ><span>${element.finalPages}</span></td> <td>${element.userEmail}</td> <td data-toggle="modal" data-target="#paymentInfo" class="payment${element.paymentStatus} font-weight-bold payments">${paymentStatus}</td> <td data-toggle="modal" data-file="${isDraftFeedback && element.firstPage && element.firstPage.name ? element.firstPage.name : ""}" data-feedback="${isDraftFeedback && element.userFeedbackDoc && element.userFeedbackDoc.name ? element.userFeedbackDoc.name : ""}" class="${isDraftFeedback ? "draft-feedback" : ""} ${element.status === STATUS.approved ? 'draft-upload': ""} status" data-target="#doc${element.status}">${status}${hasActionItem ? actionItemsHTML : ""}</td></tr>`;
     
                         $body.append(rowData);
                         $body.find('tr').last().append(finalUploadModal);
@@ -607,4 +643,19 @@ const formatDateForHTML = function(date) {
     var temp = oldDate.toLocaleDateString().split('/');
     var newDate = temp[2] + '-' + temp[1] + '-' + temp[0];
     return newDate;
+}
+
+const populateReferralModal = function() {
+    $.ajax({
+        type: "GET",
+        url: API.getAPIEndPoint('/admin/discount/coupon'),
+        success: function(data) {
+            if (data.status === true) {
+                $('#referralCode').find('.disc-amt').html(data.data.percent + "%");
+                $('#referralCode').find('.disc-coupon').html(data.data.coupon)
+            } else if (data.status === false) {
+                showAjaxError(data);
+            }
+        }
+    })
 }

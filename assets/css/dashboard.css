@@ -98,12 +98,12 @@ h1.filter-dropdown {
 }
 .table tbody th.notify::before {
     content: "";
-    height: 6px;
+    height: 20px;
     width: 6px;
     background-color: #C6213F;
     position: absolute;
-    left: 2px;
-    top: 20px;
+    left: 0;
+    /* top: 20px; */
     border-radius: 5px;
 }
 p.alert {
@@ -186,4 +186,27 @@ td.final {
 }
 td.status {
     font-weight: 600;
+}
+a.no-doc img {
+    filter: grayscale(1);
+}
+
+.admin-dashboard #referralCode .modal-content ul.nav-tabs {
+    margin: 10px 0 15px;
+    padding-bottom: 4px;
+}
+.admin-dashboard #referralCode .modal-content ul.nav-tabs li a {
+    padding: 7px 15px;
+    border-radius: 5px;
+    display: block;
+    color: #c44234;
+}
+.admin-dashboard #referralCode .modal-content ul.nav-tabs li a.active {
+    background: #fae1e6;
+}
+#referralCode .modal-content .tab-pane .textBackdrop .pull-right {
+    font-weight: 600;
+}
+#referralCode input.disc-coupon {
+    border: none !important;
 }

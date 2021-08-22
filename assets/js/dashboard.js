@@ -26,6 +26,7 @@ $(document).ready(function() {
     getSampleDocument();
     getDocumentList();
     fetchDelayed();
+    populateReferralModal();
 })
 
 $('a.cta-logout').on('click', function() {
@@ -50,6 +51,7 @@ $('#submitDoc').on('show.bs.modal', function() {
 })
 
 $(document).on('change', 'input[type=file][name=file]', function() {
+    var $target = $(this);
     var files = $(this).get(0).files[0]
     var formData = new FormData();
     formData.append('file', files);
@@ -65,6 +67,7 @@ $(document).on('change', 'input[type=file][name=file]', function() {
             contentType: false,
             success: function(data) {
                 if (data.status === true && data.data) {
+                    $target.attr('data-filename', data.data.name);
                     documentRegisterObj.file = data.data.name
                     showToast(TOAST.success, FILE_UPLOAD_SUCCESS);
                 } else if (data.status === false) {
@@ -155,7 +158,11 @@ $(document).on('click', 'td.doc-actions img', function() {
 $(document).on('click', '#docFIRST_DRAFT .cta-submit', function() {
     var reqObj = {};
     var $target = $(this);
+    var $file = $(this).closest('.modal-content').find('input[type=file]');
+    if ($file && $file.get(0).files[0])
+        reqObj['feedbackDocumentID'] = $file.attr('data-filename');
     reqObj['documentID'] = $(this).attr('data-id');
+
     var feedbackField = $(this).closest('.row').find('textarea');
     if (!feedbackField || !feedbackField.val() || !feedbackField.val().trim())
         return showFieldError(feedbackField, REQUIRED_FIELD_MSG);
@@ -338,6 +345,31 @@ const fetchDelayed = function() {
                     $('#uploadDoc').find('.regular').addClass('display-n');
                     $('#uploadDoc').find('.delayed').removeClass('display-n');
                 }
+            }
+        }
+    })
+}
+
+const copyToClipboard = function() {
+  var copyText = document.getElementById("disc-coupon-field");
+
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+
+  navigator.clipboard.writeText(copyText.value);
+
+  showToast(TOAST.success, "Coupon copied to clipboard");
+}
+
+const populateReferralModal = function() {
+    $.ajax({
+        type: "GET",
+        url: API.getAPIEndPoint('/admin/discount/coupon'),
+        success: function(data) {
+            if (data.status === true) {
+                $('#referralCode').find('#disc-coupon-field').attr('value', data.data.coupon);
+            } else if (data.status === false) {
+                showAjaxError(data);
             }
         }
     })
