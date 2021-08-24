@@ -1,1 +1,4 @@
-Math-L1 Front-End Dev
+Research Formatter
+Current Branch - UAT
+Deployment Environment - Heroku
+Live URL - https://refo-fe.netlify.app/
