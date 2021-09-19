@@ -1,7 +1,8 @@
 // GLOBAL CONSTANTS
 const LOCAL = {
   url: "http://127.0.0.1:5500",
-  api: "http://localhost:8090/api",
+  // api: "http://localhost:8090/api",
+  api: "http://api.texscript.com/api",
   domain: "127.0.0.1:5500",
 };
 const UAT = {
@@ -11,6 +12,11 @@ const UAT = {
   // AWS
   api: "http://ec2-15-206-94-234.ap-south-1.compute.amazonaws.com:8181/api",
   domain: "refo-fe.netlify.app",
+};
+const PROD = {
+  url: "https://texscript.com",
+  api: "https://api.texscript.com/api",
+  domain: "api.texscript.com",
 };
 const TOAST = {
   success: "success",
@@ -71,6 +77,7 @@ var AUTH_TOKEN = false;
 var CURRENT = "";
 if (LOCAL.url.indexOf(location.hostname) > -1) CURRENT = LOCAL;
 else if (UAT.url.indexOf(location.hostname) > -1) CURRENT = UAT;
+else if (PROD.url.indexOf(location.hostname) > -1) CURRENT = PROD;
 
 const IS_ADMIN = location.href.indexOf("admin") > -1 ? true : false;
 var PREFIX = IS_ADMIN ? "admin_" : "";
