@@ -15,6 +15,7 @@ const UAT = {
 };
 const PROD = {
   url: "https://texscript.com",
+  url1: "https://www.texscript.com",
   api: "https://api.texscript.com/api",
   domain: "api.texscript.com",
 };
@@ -77,7 +78,11 @@ var AUTH_TOKEN = false;
 var CURRENT = "";
 if (LOCAL.url.indexOf(location.hostname) > -1) CURRENT = LOCAL;
 else if (UAT.url.indexOf(location.hostname) > -1) CURRENT = UAT;
-else if (PROD.url.indexOf(location.hostname) > -1) CURRENT = PROD;
+else if (
+  PROD.url.indexOf(location.hostname) > -1 ||
+  PROD.url1.indexOf(location.hostname) > -1
+)
+  CURRENT = PROD;
 
 const IS_ADMIN = location.href.indexOf("admin") > -1 ? true : false;
 var PREFIX = IS_ADMIN ? "admin_" : "";
