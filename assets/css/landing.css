@@ -1,35 +1,35 @@
 .landing {
-    position: relative;
-    height: 700px;
+  position: relative;
+  height: 100vh;
 }
 .hero-split {
-    height: 100%;
-    width: 50%;
-    position: absolute;
+  height: 100%;
+  width: 50%;
+  position: absolute;
 }
 .hero-left {
-    left: 0;
-    background-color: #FFE1E6E5;
+  left: 0;
+  background-color: #ffe1e6e5;
 }
 .hero-right {
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 40px;
-    color: #C6213F;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 40px;
+  color: #c6213f;
 }
 .hero-right > * {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 .hero-right .cta:hover {
-    background-color: #C6213F;
-    color: #fff;
+  background-color: #c6213f;
+  color: #fff;
 }
 .hero-right .heading-3 {
-    font-weight: 600;
+  font-weight: 600;
 }
 body {
-    background: none;
-    background-color: #fff !important;
+  background: none;
+  background-color: #fff !important;
 }
